@@ -8,38 +8,36 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   void _selectCategory(BuildContext context, Category category) {
-    final filteredMeals =  dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+    final filteredMeals = dummyMeals
+        .where((meal) => meal.categories.contains(category.id))
+        .toList();
 
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) =>  MealsScreen(
+        builder: (ctx) => MealsScreen(
             title: category.title,
             meals: filteredMeals))); //Navigator.push(context, route); are same
   }
 
   @override
   Widget build(context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Pick Your Category'),
-        ),
-        body: GridView(
-          padding: const EdgeInsets.all(20),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-          ),
-          children: [
-            //availableCategories.map((category) => CategoryGridItem(category)).toList()
-            for (final category in availableCategories)
-              CategoryGridItem(
-                category: category,
-                onSelectCategory: () {
-                  _selectCategory(context, category);
-                },
-              )
-          ],
-        ));
+    return GridView(
+      padding: const EdgeInsets.all(20),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 3 / 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+      ),
+      children: [
+        //availableCategories.map((category) => CategoryGridItem(category)).toList()
+        for (final category in availableCategories)
+          CategoryGridItem(
+            category: category,
+            onSelectCategory: () {
+              _selectCategory(context, category);
+            },
+          )
+      ],
+    );
   }
 }
