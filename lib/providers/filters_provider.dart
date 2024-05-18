@@ -16,12 +16,16 @@ class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
           Filter.vegan: false,
         });
 
+  void setFilters(Map<Filter, bool> chosenFilters) {
+    state = chosenFilters;
+  }
+
   void setFilter(Filter filter, bool isActive) {
     // state[filter] = isActive; // not allowed!=> Mutating State
-    state = {
-      ...state, filter: isActive
-    };
+    state = {...state, filter: isActive};
   }
 }
 
-final filtersProvider = StateNotifierProvider<FiltersNotifier, Map<Filter,bool>>((ref) => FiltersNotifier());
+final filtersProvider =
+    StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>(
+        (ref) => FiltersNotifier());
